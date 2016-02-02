@@ -238,7 +238,7 @@ static int amlogic_bind(struct thermal_zone_device *thermal,
             }
             if (thermal_zone_bind_cooling_device(thermal, i, cdev,
                         pdata->tmp_trip[i].cpu_upper_level,
-                        pdata->tmp_trip[i].cpu_lower_level)) {
+                        pdata->tmp_trip[i].cpu_lower_level, 0)) {
                 pr_err("error binding cdev inst %d\n", i);
                 ret = -EINVAL;
                 goto out;
@@ -275,7 +275,7 @@ static int amlogic_bind(struct thermal_zone_device *thermal,
             }
             if (thermal_zone_bind_cooling_device(thermal, i, cdev,
                         pdata->tmp_trip[i].gpu_upper_level,
-                        pdata->tmp_trip[i].gpu_lower_level)) {
+                        pdata->tmp_trip[i].gpu_lower_level, 0)) {
                 pr_err("error binding cdev inst %d\n", i);
                 ret = -EINVAL;
                 goto out;
@@ -307,7 +307,7 @@ static int amlogic_bind(struct thermal_zone_device *thermal,
             printk("tmp_trip[%d].cpu_core_upper=%d\n",i,pdata->tmp_trip[i].cpu_core_upper);
             if (thermal_zone_bind_cooling_device(thermal, i, cdev,
                         pdata->tmp_trip[i].cpu_core_upper,
-                        pdata->tmp_trip[i].cpu_core_upper)) {
+                        pdata->tmp_trip[i].cpu_core_upper, 0)) {
                 pr_err("error binding cdev inst %d\n", i);
                 ret = -EINVAL;
                 goto out;
@@ -339,7 +339,7 @@ static int amlogic_bind(struct thermal_zone_device *thermal,
             printk("tmp_trip[%d].gpu_core_upper=%d\n",i,pdata->tmp_trip[i].gpu_core_upper);
             if (thermal_zone_bind_cooling_device(thermal, i, cdev,
                         pdata->tmp_trip[i].gpu_core_upper,
-                        pdata->tmp_trip[i].gpu_core_upper)) {
+                        pdata->tmp_trip[i].gpu_core_upper, 0)) {
                 pr_err("error binding cdev inst %d\n", i);
                 ret = -EINVAL;
                 goto out;
@@ -782,7 +782,7 @@ static int amlogic_register_thermal(struct amlogic_thermal_platform_data *pdata,
         ret = -EINVAL;
         goto err_unregister;
     }
-    pdata->cpucore_cool_dev = cpucore_cooling_register();
+    pdata->cpucore_cool_dev = cpucore_cooling_register(NULL);
     if (IS_ERR(pdata->cpucore_cool_dev)) {
         pr_err("Failed to register cpufreq cooling device\n");
         ret = -EINVAL;
