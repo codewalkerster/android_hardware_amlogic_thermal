@@ -26,7 +26,7 @@ LOCAL_C_INCLUDES += \
 	system/core/libutils/include \
 	system/core/libsystem/include
 
-LOCAL_MODULE := thermal.amlogic
+LOCAL_MODULE := thermal.$(TARGET_PRODUCT)
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_SRC_FILES := thermal.cpp
